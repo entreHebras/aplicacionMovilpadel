@@ -29,7 +29,11 @@ export const registroUsuario = async function (req, res) {
 };
 
 export const seleccionar = async function (req, res) {
-  const [er] = await pool.query("select *  from usuarios");
+  const id = req.params.id;
+
+  const [er] = await pool.query("select *  from usuarios where IDUsuario=? ", [
+    id,
+  ]);
 
   res.send(er);
 };

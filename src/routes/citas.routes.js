@@ -7,7 +7,7 @@ import {
 } from "../controllers/citas.controller.js";
 
 const router = Router();
-router.get("/seleccionar", seleccionar);
+router.get("/seleccionar/:id", seleccionar);
 
 router.post("/insertarUsuarios", registroUsuario);
 
