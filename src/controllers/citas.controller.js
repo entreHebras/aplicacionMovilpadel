@@ -33,3 +33,13 @@ export const seleccionar = async function (req, res) {
 
   res.send(er);
 };
+
+export const login = async function (req, res) {
+  const { nombre, contrasenia } = req.body;
+  const [er] = await pool.query(
+    "select IDUsuario from usuarios where  nombreUsuario=? and contrasenia=?",
+    [nombre, contrasenia]
+  );
+
+  res.send(er);
+};
