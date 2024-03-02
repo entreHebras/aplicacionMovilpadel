@@ -35,8 +35,8 @@ export const seleccionar = async function (req, res) {
 };
 
 export const login = async function (req, res) {
-  const nombre = req.params.correo;
-  const contrasenia = req.params.password;
+  const nombre = req.params.nombre;
+  const contrasenia = req.params.contrasenia;
   const [er] = await pool.query(
     "select IDUsuario from usuarios where  nombreUsuario=? and contrasenia=?",
     [nombre, contrasenia]
