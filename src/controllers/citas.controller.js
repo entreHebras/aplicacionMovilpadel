@@ -5,7 +5,7 @@ export const registroUsuario = async function (req, res) {
   const { nombre, correo, contrasenia } = req.body;
 
   await pool.execute(
-    "INSERT INTO usuarios (nombreUsuario, correo,contrasenia) VALUES (?,?,?)",
+    "INSERT INTO usuarios (nombreUsuario,correo,contrasenia) VALUES (?,?,?)",
     [nombre, correo, contrasenia]
   );
 
