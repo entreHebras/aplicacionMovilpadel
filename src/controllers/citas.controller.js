@@ -2,11 +2,11 @@ import { pool } from "../Db.js";
 import { transporter } from "../email.js";
 
 export const registroUsuario = async function (req, res) {
-  const { nombre, correo, contrasenia } = req.body;
+  const { nombreUsuario, correo, contrasenia } = req.body;
   try {
     await pool.query(
       "INSERT INTO usuarios (nombreUsuario,correo,contrasenia) VALUES (?,?,?)",
-      [nombre, correo, contrasenia]
+      [nombreUsuario, correo, contrasenia]
     );
   } catch (error) {
     res.send(error);
