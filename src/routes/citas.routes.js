@@ -11,5 +11,5 @@ router.get("/seleccionar", seleccionar);
 
 router.post("/insertarUsuarios", registroUsuario);
 
-router.post("/login", login);
+router.post("/login:nombre/:contrasenia", login);
 export default router;
