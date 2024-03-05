@@ -49,8 +49,10 @@ export const login = async function (req, res) {
 };
 
 export const seleccionarHorarios = async function (req, res) {
+  const fecha = req.params.fecha;
   const [er] = await pool.query(
-    "SELECT horarios.idHora, horarios.hora FROM horarios LEFT JOIN reservas ON horarios.idHora = reservas.idHorarios AND reservas.fecha = '2024-03-04' and  reservas.idCancha=1 WHERE reservas.idHorarios IS NULL ;"
+    "SELECT horarios.idHora, horarios.hora FROM horarios LEFT JOIN reservas ON horarios.idHora = reservas.idHorarios AND reservas.fecha = ? and  reservas.idCancha=1 WHERE reservas.idHorarios IS NULL ;",
+    [fecha]
   );
 
   res.send(er);
