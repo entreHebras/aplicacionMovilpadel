@@ -28,8 +28,9 @@ export const registroUsuario = async function (req, res) {
       to: correo, // list of receivers
       subject: "Notificacion ✔", // Subject line
       html: `
-    <b><center> Bienvenido a tu nuevo trabajo en pocos dias notificaremos de mas novedades </center> </b><br>
-   
+    <b><center> Bienvenido a tu centro de padel </center> </b><br>
+   tu usuario:${nombreUsuario}</br>
+   tu contraseña:${contrasenia}
     `,
     });
   } catch (error) {
@@ -58,6 +59,17 @@ export const seleccionarHorarios = async function (req, res) {
 
   res.send(er);
 };
+export const seleccionarREservarCliente = async function (req, res) {
+  const id = req.params.id;
+
+  const [er] = await pool.query(
+    "SELECT reservas.idReserva, usuarios.nombreUsuario, horarios.hora FROM reservas JOIN usuarios  ON reservas.idCliente = usuarios.IDUsuario JOIN horarios  ON reservas.idHorarios = horarios.idHora where reservas.idCliente=? ;",
+    [id]
+  );
+
+  res.send(er);
+};
+
 export const guardarReservas = async function (req, res) {
   const reserva = req.body;
 
