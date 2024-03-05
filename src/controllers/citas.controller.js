@@ -63,7 +63,7 @@ export const seleccionarREservarCliente = async function (req, res) {
   const id = req.params.id;
 
   const [er] = await pool.query(
-    "SELECT reservas.idReserva, usuarios.nombreUsuario, horarios.hora FROM reservas JOIN usuarios  ON reservas.idCliente = usuarios.IDUsuario JOIN horarios  ON reservas.idHorarios = horarios.idHora where reservas.idCliente=? ;",
+    "SELECT reservas.idReserva, usuarios.nombreUsuario, horarios.hora,reservas.fecha FROM reservas JOIN usuarios  ON reservas.idCliente = usuarios.IDUsuario JOIN horarios  ON reservas.idHorarios = horarios.idHora where reservas.idCliente=? ;",
     [id]
   );
 
