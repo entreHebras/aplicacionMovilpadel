@@ -50,6 +50,7 @@ export const login = async function (req, res) {
 
 export const seleccionarHorarios = async function (req, res) {
   const fecha = req.params.fecha;
+  console.log(fecha);
   const [er] = await pool.query(
     "SELECT horarios.idHora, horarios.hora FROM horarios LEFT JOIN reservas ON horarios.idHora = reservas.idHorarios AND reservas.fecha = ? and  reservas.idCancha=1 WHERE reservas.idHorarios IS NULL ;",
     [fecha]
