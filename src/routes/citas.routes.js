@@ -14,5 +14,5 @@ router.post("/insertarUsuarios", registroUsuario);
 
 router.get("/login/:nombre/:contrasenia", login);
 
-router.get("/seleccionar/:fecha", seleccionarHorarios);
+router.get("/seleccionarHorarios/:fecha", seleccionarHorarios);
 export default router;
