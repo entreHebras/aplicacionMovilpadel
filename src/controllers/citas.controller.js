@@ -58,3 +58,42 @@ export const seleccionarHorarios = async function (req, res) {
 
   res.send(er);
 };
+export const guardarReservas = async function (req, res) {
+  const reserva = req.body;
+
+  // Verificar si se han proporcionado datos
+  if (!reserva) {
+    return res.status(400).send("No se proporcionaron datos válidos");
+  }
+
+  // Verificar si idHorarios es un array
+  if (!Array.isArray(reserva.idHorarios) || reserva.idHorarios.length === 0) {
+    return res
+      .status(400)
+      .send("No se proporcionaron valores válidos para idHorarios");
+  }
+
+  try {
+    // Mapear los valores de idHorarios a un arreglo bidimensional para la inserción múltiple
+    const values = reserva.idHorarios.map((idHorario) => [
+      reserva.idCliente,
+      reserva.idCancha,
+      reserva.Precio,
+      idHorario,
+      reserva.fecha,
+    ]);
+    console.log("fgfo");
+    // Crear la consulta SQL para la inserción múltiple
+    const query = `INSERT INTO reservas (idCliente, idCancha, Precio, idHorarios, fecha) VALUES ?`;
+
+    // Ejecutar la consulta SQL
+    await pool.query(query, [values]);
+
+    res
+      .status(200)
+      .send("Reservas insertadas correctamente en la base de datos");
+  } catch (error) {
+    console.error("Error al insertar las reservas en la base de datos:", error);
+    res.status(500).send("Error al insertar las reservas en la base de datos");
+  }
+};
