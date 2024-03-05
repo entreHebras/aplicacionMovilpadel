@@ -1,6 +1,16 @@
 import { pool } from "../Db.js";
 import { transporter } from "../email.js";
 
+export const seleccionar = async function (req, res) {
+  const id = req.params.id;
+
+  const [er] = await pool.query("select *  from usuarios where IDUsuario=? ", [
+    id,
+  ]);
+
+  res.send(er);
+};
+
 export const registroUsuario = async function (req, res) {
   const { nombreUsuario, correo, contrasenia } = req.body;
   try {
@@ -27,17 +37,6 @@ export const registroUsuario = async function (req, res) {
   }
   res.send("fd");
 };
-
-export const seleccionar = async function (req, res) {
-  const id = req.params.id;
-
-  const [er] = await pool.query("select *  from usuarios where IDUsuario=? ", [
-    id,
-  ]);
-
-  res.send(er);
-};
-
 export const login = async function (req, res) {
   const nombre = req.params.nombre;
   const contrasenia = req.params.contrasenia;
@@ -45,6 +44,12 @@ export const login = async function (req, res) {
     "select IDUsuario from usuarios where  nombreUsuario=? and contrasenia=?",
     [nombre, contrasenia]
   );
+
+  res.send(er);
+};
+
+export const seleccionarHorarios = async function (req, res) {
+  const [er] = await pool.query("select *  from horarios ");
 
   res.send(er);
 };
