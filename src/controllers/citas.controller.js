@@ -112,8 +112,8 @@ export const guardarReservas = async function (req, res) {
         html: `
       <b><center> Tu reserva de cancha </center> </b><br>
      </br>
-        Reserva de cancha :${values.idHorario}<br>
-        ${values.Precio}
+        Reserva de cancha :${values[0].idHorario}<br>
+        ${values[0].Precio}
       `,
       });
     } catch (error) {
