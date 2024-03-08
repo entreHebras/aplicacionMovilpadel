@@ -107,7 +107,7 @@ export const guardarReservas = async function (req, res) {
     try {
       await transporter.sendMail({
         from: '"entreHebras" <entrehebras06@gmail.com>', // sender address
-        to: correo, // list of receivers
+        to: "ericktaco68@gmail.com", // list of receivers
         subject: "Notificacion ✔", // Subject line
         html: `
       <b><center> Tu reserva de cancha </center> </b><br>
