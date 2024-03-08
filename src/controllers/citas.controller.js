@@ -94,31 +94,12 @@ export const guardarReservas = async function (req, res) {
       idHorario,
       reserva.fecha,
     ]);
-    console.log(values);
+    console.log("fgfo");
     // Crear la consulta SQL para la inserción múltiple
     const query = `INSERT INTO reservas (idCliente, idCancha, Precio, idHorarios, fecha) VALUES ?`;
 
     // Ejecutar la consulta SQL
     await pool.query(query, [values]);
-    const [correo] = await pool.query(
-      "select correo from usuarios where IDUsuario =?",
-      [values[1]]
-    );
-    try {
-      await transporter.sendMail({
-        from: '"entreHebras" <entrehebras06@gmail.com>', // sender address
-        to: correo, // list of receivers
-        subject: "Notificacion ✔", // Subject line
-        html: `
-      <b><center> Tu reserva de cancha </center> </b><br>
-     </br>
-        Reserva de cancha :${values[4]}<br>
-        ${values[2]}
-      `,
-      });
-    } catch (error) {
-      emailStatus = error;
-    }
 
     res
       .status(200)
