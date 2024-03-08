@@ -94,7 +94,7 @@ export const guardarReservas = async function (req, res) {
       idHorario,
       reserva.fecha,
     ]);
-    console.log("fgfo");
+    console.log(values);
     // Crear la consulta SQL para la inserción múltiple
     const query = `INSERT INTO reservas (idCliente, idCancha, Precio, idHorarios, fecha) VALUES ?`;
 
