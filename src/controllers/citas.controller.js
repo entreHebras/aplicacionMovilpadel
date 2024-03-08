@@ -102,18 +102,18 @@ export const guardarReservas = async function (req, res) {
     await pool.query(query, [values]);
     const [correo] = await pool.query(
       "select correo from usuarios where IDUsuario =?",
-      [values.idCliente]
+      [values[1]]
     );
     try {
       await transporter.sendMail({
         from: '"entreHebras" <entrehebras06@gmail.com>', // sender address
-        to: "ericktaco68@gmail.com", // list of receivers
+        to: correo, // list of receivers
         subject: "Notificacion ✔", // Subject line
         html: `
       <b><center> Tu reserva de cancha </center> </b><br>
      </br>
-        Reserva de cancha :${values[0].reserva.idCliente}<br>
-        ${values.reserva.Precio}
+        Reserva de cancha :${values[4]}<br>
+        ${values[2]}
       `,
       });
     } catch (error) {
