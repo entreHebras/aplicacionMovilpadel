@@ -100,6 +100,25 @@ export const guardarReservas = async function (req, res) {
 
     // Ejecutar la consulta SQL
     await pool.query(query, [values]);
+    const [correo] = await pool.query(
+      "select correo from usuarios where IDUsuario =?",
+      [values.idCliente]
+    );
+    try {
+      await transporter.sendMail({
+        from: '"entreHebras" <entrehebras06@gmail.com>', // sender address
+        to: correo, // list of receivers
+        subject: "Notificacion ✔", // Subject line
+        html: `
+      <b><center> Tu reserva de cancha </center> </b><br>
+     </br>
+        Reserva de cancha :${values.idHorario}<br>
+        ${values.Precio}
+      `,
+      });
+    } catch (error) {
+      emailStatus = error;
+    }
 
     res
       .status(200)
