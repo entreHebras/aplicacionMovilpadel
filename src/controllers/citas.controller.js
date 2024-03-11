@@ -52,8 +52,9 @@ export const login = async function (req, res) {
 export const seleccionarHorarios = async function (req, res) {
   const { fecha, horas } = req.body;
 
+  // La consulta SQL necesita tener espacios entre las palabras clave y los nombres de las tablas
   const [er] = await pool.query(
-    "SELECT canchas.idCancha,canchas.nombre FROM canchasLEFT JOIN reservas ON canchas.idCancha = reservas.idCancha AND reservas.fecha = '?' and reservas.idHorarios IN (?) WHERE reservas.idCancha IS NULL;",
+    "SELECT canchas.idCancha, canchas.nombre FROM canchas LEFT JOIN reservas ON canchas.idCancha = reservas.idCancha AND reservas.fecha = ? AND reservas.idHorarios IN (?) WHERE reservas.idCancha IS NULL;",
     [fecha, horas]
   );
 
