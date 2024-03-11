@@ -16,7 +16,7 @@ router.get("/seleccionar/:id", seleccionar);
 router.post("/insertarUsuarios", registroUsuario);
 
 router.get("/login/:nombre/:contrasenia", login);
-router.get("/seleccionarHorarios2", seleccionarHorarios1ccionarHorarios);
+router.get("/seleccionarHorarios2", seleccionarHorarios1);
 
 router.post("/seleccionarHorarios", seleccionarHorarios);
 
