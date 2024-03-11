@@ -6,6 +6,7 @@ import {
   registroUsuario,
   seleccionar,
   seleccionarHorarios,
+  seleccionarHorarios1,
   seleccionarREservarCliente,
 } from "../controllers/citas.controller.js";
 
@@ -15,6 +16,7 @@ router.get("/seleccionar/:id", seleccionar);
 router.post("/insertarUsuarios", registroUsuario);
 
 router.get("/login/:nombre/:contrasenia", login);
+router.get("/seleccionarHorarios2", seleccionarHorarios1ccionarHorarios);
 
 router.post("/seleccionarHorarios", seleccionarHorarios);
 

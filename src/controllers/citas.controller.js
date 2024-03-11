@@ -60,6 +60,15 @@ export const seleccionarHorarios = async function (req, res) {
 
   res.send(er);
 };
+
+export const seleccionarHorarios1 = async function (req, res) {
+  const { fecha, horas } = req.body;
+
+  // La consulta SQL necesita tener espacios entre las palabras clave y los nombres de las tablas
+  const [er] = await pool.query("select * from horarios");
+
+  res.send(er);
+};
 export const seleccionarREservarCliente = async function (req, res) {
   const id = req.params.id;
 
