@@ -18,7 +18,7 @@ export const registroUsuario = async function (req, res) {
     "select correo from usuarios where correo=?",
     [correo]
   );
-
+  console.log(rows.length);
   if (rows.length <= 0) {
     try {
       await pool.query(
