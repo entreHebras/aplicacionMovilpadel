@@ -28,25 +28,26 @@ export const registroUsuario = async function (req, res) {
     } catch (error) {
       res.send(error);
     }
+
+    try {
+      await transporter.sendMail({
+        from: '"entreHebras" <entrehebras06@gmail.com>', // sender address
+        to: correo, // list of receivers
+        subject: "Notificacion ✔", // Subject line
+        html: `
+      <b><center> Bienvenido a tu centro de padel </center> </b><br>
+     tu usuario:${correo}</br>
+     tu contraseña:${contrasenia}
+      `,
+      });
+    } catch (error) {
+      emailStatus = error;
+    }
   } else {
     console.log("correo electronico ya registrado");
     res.status(404).json({ mesanje: "correo electronico ya registradonpm" });
   }
 
-  try {
-    await transporter.sendMail({
-      from: '"entreHebras" <entrehebras06@gmail.com>', // sender address
-      to: correo, // list of receivers
-      subject: "Notificacion ✔", // Subject line
-      html: `
-    <b><center> Bienvenido a tu centro de padel </center> </b><br>
-   tu usuario:${correo}</br>
-   tu contraseña:${contrasenia}
-    `,
-    });
-  } catch (error) {
-    emailStatus = error;
-  }
   res.send("fd");
 };
 export const login = async function (req, res) {
