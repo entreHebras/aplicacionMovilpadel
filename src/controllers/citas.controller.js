@@ -40,7 +40,7 @@ export const registroUsuario = async function (req, res) {
       subject: "Notificacion ✔", // Subject line
       html: `
     <b><center> Bienvenido a tu centro de padel </center> </b><br>
-   tu usuario:${nombreUsuario}</br>
+   tu usuario:${correo}</br>
    tu contraseña:${contrasenia}
     `,
     });
