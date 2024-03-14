@@ -15,7 +15,7 @@ export const registroUsuario = async function (req, res) {
   const { nombreUsuario, correo, contrasenia } = req.body;
 
   const [rows] = await pool.query(
-    "select correo   from usuarios where correo=?",
+    "select correo from usuarios where correo=?",
     [correo]
   );
 
