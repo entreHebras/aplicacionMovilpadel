@@ -13,13 +13,24 @@ export const seleccionar = async function (req, res) {
 
 export const registroUsuario = async function (req, res) {
   const { nombreUsuario, correo, contrasenia } = req.body;
-  try {
-    await pool.query(
-      "INSERT INTO usuarios (nombreUsuario,correo,contrasenia) VALUES (?,?,?)",
-      [nombreUsuario, correo, contrasenia]
-    );
-  } catch (error) {
-    res.send(error);
+
+  const [rows] = await pool.query(
+    "select correo   from usuarios where correo=?",
+    [correo]
+  );
+
+  if (rows.length <= 0) {
+    try {
+      await pool.query(
+        "INSERT INTO usuarios (nombreUsuario,correo,contrasenia) VALUES (?,?,?)",
+        [nombreUsuario, correo, contrasenia]
+      );
+    } catch (error) {
+      res.send(error);
+    }
+  } else {
+    console.log("correo electronico ya registrado");
+    res.status(404).json({ mesanje: "correo electronico ya registradonpm" });
   }
 
   try {
